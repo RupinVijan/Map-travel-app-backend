@@ -1,17 +1,19 @@
 const mongoose = require("mongoose");
+const userModel = require('./userModel')
 
 const quesSchema = mongoose.Schema({
   user:{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "userModel",
+    ref: userModel,
   },
-  longitude:{
-    type:String,
+  price:{
+    type:Number,
     required:true
   },
-  latitude:{
+  purpose:{
     type:String,
-    required:true
+    enums:['Others' , 'Food' , 'Shopping' , 'Travel'],
+    default:'Others'
   },
   title:{
     type:String,
@@ -25,4 +27,4 @@ const quesSchema = mongoose.Schema({
 }, {
   timestamps: true
 });
-module.exports = mongoose.model("locations", quesSchema);
+module.exports = mongoose.model("expenses", quesSchema);
