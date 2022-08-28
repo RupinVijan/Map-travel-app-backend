@@ -23,6 +23,7 @@ app.get('/', (req,res) => {
     res.send('Hello,World!')
 })
 app.use('/api' , require('./routes/userRoutes'))
+app.use('/api' , require('./routes/locationRoutes'))
 // app.post('/api/question' ,async(req,res) => {
 //   try {
 //     let user = await userModel.findById(req.body.token);

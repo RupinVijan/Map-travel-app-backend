@@ -16,10 +16,7 @@ const jwtCode = async(id) => {
         const userToken = jwt.sign({ id }, jwt_token);
         return (userToken);
 }
-const jwtDecode = async(token) => {
-        const userToken = jwt.verify(token, jwt_token);
-        return (userToken.id);
-}
+
 
 
 
