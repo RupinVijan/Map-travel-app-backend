@@ -28,6 +28,15 @@ router.post('/expense' ,async(req,res) => {
     let user = await locationModel.find({user:userToken.id}).populate('user');
     return res.status(200).send({status:true,msg:'Fetched Successfully!' , user})
   })
+  router.get('/expense/byUser/filter' , async(req,res) => {
+    const userToken = jwt.verify(req.headers.usertoken, jwt_token);
+    let user = await locationModel.find({user:userToken.id});
+    if(!user) return res.status(404).send({status:false , msg:'Auth Error!'});
+    let toSearch;
+    req.query.search?toSearch = req.query.search : toSearch = 'Food' 
+    user = await locationModel.find({user:userToken.id , purpose : toSearch});
+    return res.status(200).send({status:true,msg:'Fetched Successfully!' , user})
+  })
 router.delete('/expense/:id' , async(req,res) => {
   try {
     const expenseToFind = await locationModel.findById(req.params.id);
